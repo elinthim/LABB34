@@ -13,5 +13,10 @@ namespace LABB34.Models
         public string Adress { get; set; } = null!;
 
         public virtual Student? FkStudent { get; set; }
+
+        internal static object OrderByDescending(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

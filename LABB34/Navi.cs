@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using LABB34.Data;
+﻿using LABB34.Data;
 using LABB34.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace LABB34
 {
@@ -29,16 +22,16 @@ namespace LABB34
                 Console.WriteLine("|  [8] Close the programe                  |");
                 Console.WriteLine("> ---------------------------------------- <");
                 //Console.Writeline("");
-                //int option = int.Parse(Console.ReadLine());
+                int option = int.Parse(Console.ReadLine());
                 Console.Clear();
 
                 //switch (option)
-                //int input = checkNr();
+                int input = checkNr();
                 //switch (input)
                 var choice = Console.ReadLine();
                 switch (choice)
                 {
-                    case 1:                        
+                    case 1:
                         ChooseAClass();
                         break;
 
@@ -47,14 +40,14 @@ namespace LABB34
                         break;
 
                     case 3:
-                        //AddStaffMember();
+                        AddStaffMember();
                         break;
 
                     case 4:
                         //Subject();
                         break;
                     case 5:
-                        //SeeAllStaffMembers();
+                        StaffId();
                         break;
                     case 6:
                         //StudentInfo();
@@ -97,11 +90,11 @@ namespace LABB34
                 {
                     using (var db = new Labb4Context())
                     {
-                        var SeeAllStudents = from a in db.Students orderby a.Fname select a;
+                        var SeeAllStudents = from a in db.Students orderby a.FirstName select a;
                         Console.WriteLine("");
                         foreach (var item in SeeAllStudents)
                         {
-                            Console.WriteLine(item.Fname + " " + item.Lname);
+                            Console.WriteLine(item.FirstName + " " + item.LastName);
 
                         }
                     }
@@ -118,7 +111,7 @@ namespace LABB34
                         foreach (var it in SeeAllStudents)
                         {
 
-                            Console.WriteLine(it.Fname + " " + it.Lname);
+                            Console.WriteLine(it.FirstName + " " + it.LastName);
                         }
                     }
                     Console.WriteLine("Enter will return you to the meny");
@@ -136,11 +129,11 @@ namespace LABB34
                 {
                     using (var db = new Labb4Context())
                     {
-                        var Student = from a in StudAll orderby a.Lname select a;
+                        var Student = from a in StudentContactList orderby a.LastName select a;
                         Console.WriteLine("");
-                        foreach (var item in Student)
+                        foreach (var item in StudentContactList)
                         {
-                            Console.WriteLine(item.Lname + " " + item.Fname);
+                            Console.WriteLine(item.LastName + " " + item.FirstName);
 
                         }
                     }
@@ -152,12 +145,12 @@ namespace LABB34
                 {
                     using (var db = new Labb4Context())
                     {
-                        var Student = from a in Schoolcontext.OrderByDescending(a => a.Fname) select a;
+                        var Student = from a in StudentContactList.OrderByDescending(a => a.FirstName) select a;
                         Console.WriteLine("");
                         foreach (var item in Student)
                         {
 
-                            Console.WriteLine(item.Lname + " " + item.Fname);
+                            Console.WriteLine(item.LastName + " " + item.FirstName);
                         }
                     }
                     Console.WriteLine("Enter will return you to the meny");
@@ -167,27 +160,26 @@ namespace LABB34
             }
 
         }
-        // public void AddStaff()
-        //{
-        //  using Labb4Context = new Labb4Context();
-        // StaffAdmin e1 = new StaffAdmin();
-        // Console.Write("Firstname : ");
-        // e1.Fname = Console.ReadLine();
-        // Console.Write("Lastname : ");
-        // e1.Lname = Console.ReadLine();
-        // Console.Write("Work title : ");
-        //  e1.Position = Console.ReadLine();
-        //  Labb4Context.StaffAdmins.Add(e1);
-        //  Labb4Context.SaveChanges();
-        //  Console.WriteLine("Database updated");
-        //  Console.WriteLine("TrEnter will return you to the meny");
-        //  Console.ReadKey();
-        // Console.Clear();
+        public void AddStaffMember()
+        {
+            using Labb4Context = new Labb4Context();
+            StaffContactList e1 = new StaffContactList();
+            Console.Write("Firstname : ");
+            e1.FirstName = Console.ReadLine();
+            Console.Write("Lastname : ");
+            e1.LastName = Console.ReadLine();
+            Console.Write("Work title : ");
+            e1.FkStaff = Console.ReadLine();
+            //Labb4Context-Staff.Add(e1);
+            //Labb4Context.SaveChanges();
+            Console.WriteLine("Database updated");
+            Console.WriteLine("TrEnter will return you to the meny");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+
     }
 
 
 }
-
-
-
-//}
